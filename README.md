@@ -6,7 +6,7 @@ __Réalisation d'une application “météo” orientée événements extrêmes_
     - Système de stockage des préférences de l'utilisateur
     - Choix de la fréquence de raffraichissement des données par l'utilsateur
     - Choix d'une ville principale
-    _ Utuliser des methodes de sycnhronisation (ex : async / wait)
+    - Utilisation de méthodes de sycnhronisation (ex : async / await)
 
 
 # Choix techniques
