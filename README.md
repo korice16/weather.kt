@@ -6,6 +6,7 @@ __Réalisation d'une application “météo” orientée événement extrêmes__
     - Système de stockage de préférence de l'utilisateur
     - Choix de la fréquence de raffraichissement des données par l'utilsateur
     - Choix d'une ville principale
+    _ Utuliser des methodes de sycnhronisation (ex : async / wait)
 
 
 # Choix techniques
@@ -14,4 +15,4 @@ __Réalisation d'une application “météo” orientée événement extrêmes__
     - Logiciel : Android Studio
 
 # Modélisation UML
-![Weather](img/UMLWeather_Patrice_Samir_Mehdi.png) 
+![UMLWeather](img/UMLWeather_Patrice_Samir_Mehdi.PNG) 
