@@ -5,16 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 
-class MainActivity : AppCompatActivity() {
+class ManageCities : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.manage_cities)
 
-        val imgBtnManageCities: ImageButton = findViewById(R.id.imgBtnManageCities)
-        imgBtnManageCities.setOnClickListener{
-            val intent = Intent (this, ManageCities::class.java)
+        val imgBtnReturn: ImageButton = findViewById(R.id.imgBtnReturn)
+        imgBtnReturn.setOnClickListener{
+            val intent = Intent (this, MainActivity::class.java)
             startActivity(intent)
         }
-
     }
 }
