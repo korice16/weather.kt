@@ -1,5 +1,5 @@
 package com.example.weatherapp.model.enumeration
 
-enum class HumidityUnit {
-    PERCENT
+enum class HumidityUnit (val symbol: String){
+    PERCENT("%")
 }

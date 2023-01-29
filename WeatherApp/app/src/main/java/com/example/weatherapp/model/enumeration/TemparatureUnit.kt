@@ -1,7 +1,8 @@
 package com.example.weatherapp.model.enumeration
 
-enum class TemparatureUnit {
-    CELSIUS,
-    KELVIN,
-    FAHRENHEIT
+enum class TemparatureUnit (val symbol: String) {
+    CELSIUS("°C"),
+    KELVIN("°K"),
+    FAHRENHEIT("°F")
 }
+

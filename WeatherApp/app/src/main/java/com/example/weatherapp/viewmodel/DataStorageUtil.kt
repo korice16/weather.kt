@@ -2,21 +2,27 @@ package com.example.weatherapp.viewmodel
 
 import android.content.Context
 import android.os.Environment
+import android.util.Log
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
 object DataStorageUtil {
-
     enum class StorageType{
         APP_INNER_DATA, APP_INNER_CACHE, EXTERNAL_DATA, EXTERNAL_CACHE
     }
+
+    val prefCitiesFileName="favorite_cities.txt"
+    val prefThresholdFileName="threshold_Weather.txt"
 
     private fun isExternalStorageWritable():Boolean{
         return Environment.getExternalStorageState()==Environment.MEDIA_MOUNTED
     }
 
+    /*
+    creer le fichier
+     */
     fun createFile(contex: Context, storageType: StorageType, fileName: String, vararg childFolders: String): File{
         var folder:File=selectFolder(contex, storageType)
 
@@ -38,6 +44,9 @@ object DataStorageUtil {
         return file
     }
 
+    /**
+     * sauvegarde n'importe quel fichier en txt
+     */
     fun storeTextInfoFile(contex: Context,storageType: StorageType, fileName: String, fileContent: String, vararg childFolders: String): Boolean{
         try {
             var folder:File=selectFolder(contex, storageType)
@@ -71,6 +80,9 @@ object DataStorageUtil {
 
     }
 
+    /**
+     * sauvegarde la ville dans fichier, dans un certains formats
+     */
     fun saveCityIntoStorage(contex: Context,storageType: StorageType, fileName: String, fileContent: String, vararg childFolders: String): Boolean{
         try {
             var folder:File=selectFolder(contex, storageType)
@@ -96,7 +108,8 @@ object DataStorageUtil {
             }
 
             //fileTxt+=fileContent
-            val txt= addCity(fileTxt,fileContent)
+            var txt= addCity(fileTxt,fileContent)
+            txt=txt.replace(" ","")
             //write into fila
             val fileOutputStream= FileOutputStream(file)
             val byteArray=txt.toByteArray(charset("UTF-8"))
@@ -111,6 +124,9 @@ object DataStorageUtil {
 
     }
 
+    /**
+     * Recuper n'importe quel fichier et le renvoie en String
+     */
     fun loadTextFromFile(contex: Context,storageType: StorageType, fileName: String, vararg childFolders: String): String{
         var folder:File=selectFolder(contex, storageType)
 
@@ -132,6 +148,38 @@ object DataStorageUtil {
         return String(byteArray, charset("UTF-8"))
     }
 
+    /**
+     * Recuper les villes enregistrer en txt et LE retourne en en arrayList<String>
+     */
+    fun loadCitiesFromFile(contex: Context,storageType: StorageType, fileName: String, vararg childFolders: String): ArrayList<String>{
+        var folder:File=selectFolder(contex, storageType)
+
+        for(i in childFolders.indices){
+            folder=File(folder, childFolders[i])
+
+            if(!folder.exists()){
+                return ArrayList()
+            }
+        }
+
+        val file=File(folder, fileName)
+        if(!file.exists()){
+            return ArrayList()
+        }
+
+        val fileInputStream=FileInputStream(file)
+        val byteArray=fileInputStream.readBytes()
+        val fileLoad=String(byteArray, charset("UTF-8"))
+
+        var array_fc: ArrayList<String>
+        array_fc = fileLoad.split(",").toTypedArray().toCollection(ArrayList<String>())
+
+        return array_fc
+    }
+
+    /**
+     * Le type de sauvegarde
+     */
     private fun selectFolder(contex: Context, storageType: StorageType):File{
         return when(storageType){
             StorageType.APP_INNER_DATA->{
@@ -166,6 +214,9 @@ object DataStorageUtil {
 
     }
 
+    /**
+     * fonction qui ajoute une Ville
+     */
     private fun addCity(fileLoad: String,newCity:String):String{
         /*
         val list= array.joinToString(
@@ -179,12 +230,13 @@ object DataStorageUtil {
         if(fileLoad.isBlank()){
             array_fc= mutableListOf(newCity)
         }else {
+
             array_fc = fileLoad.split(",").toTypedArray().toMutableList()
             if(!array_fc.contains(newCity)){
                 array_fc.add(newCity)
             }
         }
-
+        Log.d("dtu",array_fc.toString())
         return array_fc.joinToString()
     }
 }

@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <ImageButton
         android:id="@+id/btn_manage_preferences"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_Cities"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerCities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/spinner_Cities"
-        app:layout_constraintTop_toTopOf="@+id/spinner_Cities"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCities"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCities"
         app:layout_constraintVertical_bias="0.476"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
 
     <Spinner
-        android:id="@+id/spinner_Cities"
+        android:id="@+id/spinnerCities"
         android:layout_width="140dp"
         android:layout_height="30dp"
         android:layout_marginTop="24dp"
@@ -34,71 +34,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner_Cities"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_Cities"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerCities"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerCities"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinner_Cities"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCities"
         app:layout_constraintVertical_bias="0.523"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
-    <TextView
-        android:id="@+id/textViewCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:text="TextView"
+    <ScrollView
+        android:id="@+id/ScrollerViewWeather"
+        android:layout_width="375dp"
+        android:layout_height="324dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_Cities" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCities">
 
-    <TextView
-        android:id="@+id/temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textViewCity"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textViewCity"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCity"
-        app:layout_constraintVertical_bias="0.146" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
-    <TextView
-        android:id="@+id/Sunrise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/description"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/description"
-        app:layout_constraintTop_toBottomOf="@+id/description"
-        app:layout_constraintVertical_bias="0.229" />
-
-    <TextView
-        android:id="@+id/speed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/Sunrise"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/Sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/Sunrise"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <TextView
-        android:id="@+id/description"
-        android:layout_width="58dp"
-        android:layout_height="20dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/temp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/temp"
-        app:layout_constraintTop_toBottomOf="@+id/temp"
-        app:layout_constraintVertical_bias="0.21" />
 </androidx.constraintlayout.widget.ConstraintLayout>
