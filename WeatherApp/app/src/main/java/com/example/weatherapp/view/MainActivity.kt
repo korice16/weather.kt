@@ -30,11 +30,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var scrollerViewWeather: ScrollView
     private lateinit var spinnerCities:Spinner
     private lateinit var viewmodel: MainActivityViewModel
+    private lateinit var imgBtnThreshold: ImageButton
     private var selectedItem: Int= -1
 
     override fun onResume() {
         super.onResume()
         viewmodel.refreshPrefCities(this)
+        //getLiveData()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         viewmodel.refreshPrefCities(this)
 
         scrollerViewWeather=findViewById<ScrollView>(R.id.ScrollerViewWeather)
+        imgBtnThreshold=findViewById(R.id.imgBtnThreshold)
 
         spinnerSetting()
         pw1()
@@ -53,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         imgBtnManageCities.setOnClickListener{
             val intent = Intent (this, ManageCities::class.java)
             startActivity(intent)
+        }
+        imgBtnThreshold.setOnClickListener {
+            val intent2 = Intent (this, Threshold::class.java)
+            startActivity(intent2)
         }
 
     }
@@ -75,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                         val selectedItem = parent?.getItemAtPosition(pos).toString()
                         viewmodel.refreshWeather(applicationContext,selectedItem)
                         getLiveData()
-                        this@MainActivity.selectedItem =pos
+                        this@MainActivity.selectedItem = pos
                     }
                 }
 
@@ -96,9 +103,9 @@ class MainActivity : AppCompatActivity() {
     private fun getLiveData(){
         Log.d("Main", "Im in getLiver")
         viewmodel.weather_data.observe(this, Observer { data ->
-            if(data!=null){
+
                 setValue(data)
-            }
+
 
         })
     }
@@ -132,6 +139,14 @@ class MainActivity : AppCompatActivity() {
                 "Sunset : " + weather.getSunTime().getSunsetDate()
 
         return txt
+    }
+
+    /**
+     * Applique les changement des données apres que l'utilisateurs aie selectionner une ville
+     */
+    fun notifyDataSetChangedSelectedSpinner(selectedItem:String){
+        viewmodel.refreshWeather(applicationContext,selectedItem)
+        getLiveData()
     }
 //---------------------------------------TEST NOTIFICATION---------------------------
 

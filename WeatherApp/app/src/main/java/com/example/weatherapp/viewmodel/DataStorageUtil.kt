@@ -125,6 +125,50 @@ object DataStorageUtil {
     }
 
     /**
+     * sauvegarde la ville dans fichier, dans un certains formats
+     */
+    fun deleteCityFromStorage(contex: Context,storageType: StorageType, fileName: String, fileContent: String, vararg childFolders: String): Boolean{
+        try {
+            var folder:File=selectFolder(contex, storageType)
+
+            //create child folder if you have
+            for(i in childFolders.indices){
+                folder=File(folder, childFolders[i])
+
+                if(!folder.exists()){
+                    folder.mkdir()
+                }
+            }
+
+            //create file
+            var fileTxt=""
+            val file=File(folder, fileName)
+            if(!file.exists()){
+                file.createNewFile()
+            }else{//file existe
+                val fileInputStream=FileInputStream(file)
+                val byteArray=fileInputStream.readBytes()
+                fileTxt+= String(byteArray, charset("UTF-8"))
+            }
+
+            //fileTxt+=fileContent
+            var txt= deleteCity(fileTxt,fileContent)
+            txt=txt.replace(" ","")
+            //write into fila
+            val fileOutputStream= FileOutputStream(file)
+            val byteArray=txt.toByteArray(charset("UTF-8"))
+            fileOutputStream.write(byteArray,0,byteArray.size)
+            fileOutputStream.close()
+            return true
+        }
+        catch (e: Exception){
+            e.printStackTrace()
+            return false
+        }
+
+    }
+
+    /**
      * Recuper n'importe quel fichier et le renvoie en String
      */
     fun loadTextFromFile(contex: Context,storageType: StorageType, fileName: String, vararg childFolders: String): String{
@@ -236,7 +280,32 @@ object DataStorageUtil {
                 array_fc.add(newCity)
             }
         }
-        Log.d("dtu",array_fc.toString())
+        return array_fc.joinToString()
+    }
+
+    /**
+     * fonction qui supprime une Ville
+     */
+    private fun deleteCity(fileLoad: String,oldCity:String):String{
+
+        var array_fc: MutableList<String>
+
+        /*
+        if(fileLoad.isBlank()){
+            array_fc= mutableListOf(oldCity)
+        }else {
+
+            array_fc = fileLoad.split(",").toTypedArray().toMutableList()
+            if(array_fc.contains(oldCity)){
+                array_fc.remove(oldCity)
+            }
+        }
+
+         */
+        array_fc = fileLoad.split(",").toTypedArray().toMutableList()
+        if(array_fc.contains(oldCity)){
+            array_fc.remove(oldCity)
+        }
         return array_fc.joinToString()
     }
 }

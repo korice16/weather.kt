@@ -17,9 +17,11 @@ class ManageCities : AppCompatActivity() {
     //https://api.openweathermap.org/data/2.5/weather?q=paris&lang=fr&appid=abb8e45cee0476bb9a364e0404835ad9
     private lateinit var textView:TextView
     private lateinit var btGet:Button
+    private lateinit var btnDelete:Button
     private lateinit var eCity:EditText
     private lateinit var scrollViewCities:ScrollView
     private lateinit var manageCitiesViewModel: ManageCitiesViewModel
+    private lateinit var spinnerCitiesMC:Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +29,31 @@ class ManageCities : AppCompatActivity() {
         manageCitiesViewModel=ViewModelProvider(this).get(ManageCitiesViewModel::class.java)
         manageCitiesViewModel.refreshPrefCities(this)
         scrollViewCities=findViewById<ScrollView>(R.id.ScrollerViewCities)
+        spinnerCitiesMC=findViewById(R.id.spinnerCitiesMC)
 
         textView=findViewById(R.id.textView2)
         eCity=findViewById(R.id.eCity)
+        btGet=findViewById(R.id.btnGet)
+        btnDelete=findViewById(R.id.btnDelete)
+
+        spinnerSetting()
 
         getLiveData()
-        btGet=findViewById(R.id.btnGet)
+
         btGet.setOnClickListener {
             reqSave()
         }
 
+        btnDelete.setOnClickListener {
+            val selectItem=spinnerCitiesMC.selectedItem.toString()
+            if(selectItem.equals("")){
+                Toast.makeText(this, "Non-existent city", Toast.LENGTH_LONG).show()
+            }else{
+                delete(selectItem)
+            }
+
+
+        }
         val imgBtnReturn: ImageButton = findViewById(R.id.imgBtnReturn)
         imgBtnReturn.setOnClickListener{
             finish();
@@ -70,7 +87,7 @@ class ManageCities : AppCompatActivity() {
                 manageCitiesViewModel.refreshPrefCities(this)
                 getLiveData()
             }else{
-                Toast.makeText(this, "Ville inexistante", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Non-existent city", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -85,6 +102,17 @@ class ManageCities : AppCompatActivity() {
     }
 
     /**
+     * Supression la ville dans le telephones
+     */
+    private fun delete(city:String){
+        DataStorageUtil.deleteCityFromStorage(this,
+            DataStorageUtil.StorageType.EXTERNAL_DATA, "favorite_cities.txt",city)
+        notifyDataSetChanged()
+
+        Toast.makeText(this, "Sucess delete"+city+"ok", Toast.LENGTH_LONG).show()
+    }
+
+    /**
      * Prends un arrayList<String> de ville et renvoie un String des villes, chacun sur une ligne
      */
     private fun txtCities(cities:ArrayList<String>):String{
@@ -93,5 +121,20 @@ class ManageCities : AppCompatActivity() {
             txtCities+=citie+"\n"
         }
         return txtCities
+    }
+
+    /**
+     * Fonction gerant les elements dans le spinner ainsi que les actions à effectuer en cas de selection
+     */
+    private fun spinnerSetting(){
+        manageCitiesViewModel.pref_cities.observe(this, Observer { data ->
+            val adapter=ArrayAdapter(this, android.R.layout.simple_spinner_item, data)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCitiesMC.adapter=adapter
+        })
+    }
+
+    fun notifyDataSetChanged(){
+        manageCitiesViewModel.refreshPrefCities(this)
     }
 }

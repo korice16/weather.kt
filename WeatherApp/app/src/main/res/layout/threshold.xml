@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editTempMax5"
+        android:layout_width="59dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempMax5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempMax5"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempMax5" />
+
+    <TextView
+        android:id="@+id/textViewTempMax5"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
+        android:text="Max :"
+        app:layout_constraintBottom_toBottomOf="@+id/editTempMin5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintStart_toEndOf="@+id/editTempMin5"
+        app:layout_constraintTop_toTopOf="@+id/editTempMin5"
+        app:layout_constraintVertical_bias="0.687" />
+
+    <EditText
+        android:id="@+id/editTempMin5"
+        android:layout_width="61dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempMin2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempMin2"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempMin2"
+        app:layout_constraintVertical_bias="0.411" />
+
+    <TextView
+        android:id="@+id/textViewTempMin2"
+        android:layout_width="38dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:text="Min :"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxWindSpeed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxWindSpeed"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxWindSpeed"
+        app:layout_constraintVertical_bias="0.562" />
+
+    <CheckBox
+        android:id="@+id/checkBoxWindSpeed"
+        android:layout_width="84dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="436dp"
+        android:text="Wind"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/checkBoxTemp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/checkBoxTemp"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTemp"
+        app:layout_constraintVertical_bias="0.714" />
+
+    <TextView
+        android:id="@+id/textViewTempMax"
+        android:layout_width="38dp"
+        android:layout_height="25dp"
+        android:text="Max :"
+        app:layout_constraintBottom_toBottomOf="@+id/editTempMin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.268"
+        app:layout_constraintStart_toEndOf="@+id/editTempMin"
+        app:layout_constraintTop_toTopOf="@+id/editTempMin"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <EditText
+        android:id="@+id/editTempMax"
+        android:layout_width="59dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempMax"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempMax"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempMax"
+        app:layout_constraintVertical_bias="0.625" />
+
+    <TextView
+        android:id="@+id/textVThresholdTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Threshold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTemp"
+        android:layout_width="83dp"
+        android:layout_height="30dp"
+        android:text="Temp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCitiesT"
+        app:layout_constraintVertical_bias="0.073" />
+
+    <EditText
+        android:id="@+id/editTempMin"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTempMin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toEndOf="@+id/textViewTempMin"
+        app:layout_constraintTop_toTopOf="@+id/textViewTempMin"
+        app:layout_constraintVertical_bias="0.411" />
+
+    <TextView
+        android:id="@+id/textViewTempMin"
+        android:layout_width="38dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:text="Min :"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxTemp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toEndOf="@+id/checkBoxTemp"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxTemp"
+        app:layout_constraintVertical_bias="0.59" />
+
+    <Button
+        android:id="@+id/btnSaveThreshold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTempMin5"
+        app:layout_constraintVertical_bias="0.126" />
+
+    <Spinner
+        android:id="@+id/spinnerCitiesT"
+        android:layout_width="114dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textVThresholdTitle"
+        app:layout_constraintVertical_bias="0.077" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your city"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerCitiesT"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerCitiesT"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerCitiesT" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

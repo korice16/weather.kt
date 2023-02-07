@@ -24,7 +24,6 @@ class Weather{
         this.wind=wind
         this.clouds=clouds
         this.sunTime=sunTime
-
     }
 
     //static method
