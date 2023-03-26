@@ -50,13 +50,17 @@ class MainActivity : AppCompatActivity() {
         imgBtnThreshold=findViewById(R.id.imgBtnThreshold)
 
         spinnerSetting()
-        pw1()
+        //pw1()
+        // Planifiez une tâche périodique pour exécuter le code de notification un temps determinée
+        NotificationWorker()
 
+        //Bouton qui redirige vers la page pour ajouter des villes
         val imgBtnManageCities: ImageButton = findViewById(R.id.imgBtnManageCities)
         imgBtnManageCities.setOnClickListener{
             val intent = Intent (this, ManageCities::class.java)
             startActivity(intent)
         }
+        //Bouton qui redirige vers la page pour configurer le seuil de preference
         imgBtnThreshold.setOnClickListener {
             val intent2 = Intent (this, Threshold::class.java)
             startActivity(intent2)
@@ -103,10 +107,7 @@ class MainActivity : AppCompatActivity() {
     private fun getLiveData(){
         Log.d("Main", "Im in getLiver")
         viewmodel.weather_data.observe(this, Observer { data ->
-
                 setValue(data)
-
-
         })
     }
 
@@ -150,6 +151,17 @@ class MainActivity : AppCompatActivity() {
     }
 //---------------------------------------TEST NOTIFICATION---------------------------
 
+    private fun NotificationWorker(){
+        // Planifiez une tâche périodique pour exécuter le code de notification un temps determinée
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val weatherNotificationWorkRequest = PeriodicWorkRequestBuilder<NotificationWorkerManager>(3 , TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+        WorkManager.getInstance(applicationContext).enqueue(weatherNotificationWorkRequest)
+    }
     private fun pw1(){
         val workManager = WorkManager.getInstance(application)
 
@@ -158,7 +170,7 @@ class MainActivity : AppCompatActivity() {
             .setRequiresCharging(true)
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-        val request = PeriodicWorkRequestBuilder<NotificationWorkerManager>(15, TimeUnit.MINUTES)
+        val request = PeriodicWorkRequestBuilder<NotificationWorkerManager>(3, TimeUnit.MINUTES)
             .setConstraints(constraints)
             //.setBackoffCriteria(BackoffPolicy.EXPONENTIAL, 30, TimeUnit.SECONDS)
             //.setInitialDelay(15, TimeUnit.MINUTES)

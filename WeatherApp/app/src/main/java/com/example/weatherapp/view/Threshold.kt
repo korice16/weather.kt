@@ -1,5 +1,6 @@
 package com.example.weatherapp.view
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.model.datatype.json_threshold.Temperature
 import com.example.weatherapp.model.datatype.json_threshold.Weather
 import com.example.weatherapp.model.datatype.json_threshold.WindSpeed
+import com.example.weatherapp.service.OpenWeatherService
 import com.example.weatherapp.viewmodel.DataStorageUtil
 import com.example.weatherapp.viewmodel.ThresholdViewModel
 import org.json.JSONObject
@@ -23,7 +25,7 @@ class Threshold : AppCompatActivity() {
         thresholdViewModel=ViewModelProvider(this).get(ThresholdViewModel::class.java)
         //thresholdViewModel=ThresholdViewModel(this)
         thresholdViewModel.refreshPrefCities(this)
-        thresholdViewModel.refreshThreshold_json(this)
+        //thresholdViewModel.refreshThreshold_json(this)
         spinnerCitiesT=findViewById(R.id.spinnerCitiesT)
 
         spinnerSetting()
@@ -49,12 +51,12 @@ class Threshold : AppCompatActivity() {
 
     private fun weatherJson(weather: Weather, temperature: Temperature, windSpeed: WindSpeed){
         val temperatureJson = JSONObject()
-        temperatureJson.put("selected", temperature.selected)
+        temperatureJson.put("isSelected", temperature.selected)
         temperatureJson.put("min", temperature.min)
         temperatureJson.put("max", temperature.max)
 
         val windJson = JSONObject()
-        windJson.put("selected", windSpeed.selected)
+        windJson.put("isSelected", windSpeed.selected)
         windJson.put("min", windSpeed.min)
         windJson.put("max", windSpeed.max)
 
@@ -70,14 +72,12 @@ class Threshold : AppCompatActivity() {
      * Enregistre la ville dans le telephones
      */
     private fun store(json:JSONObject){
-       DataStorageUtil.storeTextInfoFile(this,
+        DataStorageUtil.storeTextInfoFile(this,
             DataStorageUtil.StorageType.EXTERNAL_DATA, "threshold.txt",json.toString())
 
 
         Toast.makeText(this, "Sucess save"+json.toString(), Toast.LENGTH_LONG).show()
     }
-
-
 
     /**
      * Fonction gerant les elements dans le spinner ainsi que les actions à effectuer en cas de selection
